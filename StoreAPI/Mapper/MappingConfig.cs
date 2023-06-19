@@ -23,6 +23,10 @@ namespace StoreAPI.Mapper
                 config.CreateMap<TakeCareDevelopment, TakeCareDevelopmentCreateDTO>().ReverseMap();
                 config.CreateMap<BabyTakeCare, BabyTakeCareCreateDTO>().ReverseMap();
                 config.CreateMap<Brand, BrandCreateDTO>().ReverseMap();
+                config.CreateMap<OrderDetail, OrderDetailsCreateDTO>().ReverseMap();
+                config.CreateMap<Voucher, VoucherCreateDTO>().ReverseMap();
+                config.CreateMap<UserVoucher, UserVoucherCreateDTO>().ReverseMap();
+                config.CreateMap<OrderVoucher, OrderVoucherCreateDTO>().ReverseMap();
 
             });
             return mappingConfig;

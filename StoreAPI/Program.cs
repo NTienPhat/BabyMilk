@@ -14,6 +14,9 @@ IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+//Cors
+builder.Services.AddCors();
+
 //Repository
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
@@ -26,7 +29,10 @@ builder.Services.AddScoped<IDevelopmentRepository, DevelopmentRepository>();
 builder.Services.AddScoped<ITakeCareDevelopmentRepository, TakeCareDevelopmentRepository>();
 builder.Services.AddScoped<IBabyTakeCareRepository, BabyTakeCareRepository>();
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
-
+builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+builder.Services.AddScoped<IVoucherRepository, VoucherRepository>();
+builder.Services.AddScoped<IUserVoucherRepository, UserVoucherRepository>();
+builder.Services.AddScoped<IOrderVoucherRepository, OrderVoucherRepository>();
 //Add NewtonsoftJson
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
@@ -56,6 +62,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors(builder =>
+{
+    builder.AllowAnyOrigin()
+    .AllowAnyHeader()
+    .AllowAnyMethod();
+    });
 
 app.UseHttpsRedirection();
 
