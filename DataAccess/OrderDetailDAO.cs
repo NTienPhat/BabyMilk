@@ -100,8 +100,27 @@ namespace DataAccess
         {
             try
             {
-                _dbContext.OrderDetails.Add(cate);
-                _dbContext.SaveChanges();
+                var pro = _dbContext.Products.FirstOrDefault(x => x.ProductId == cate.ProductId);
+                if (pro != null)
+                {
+                    if(pro.Quantity > cate.Quantity)
+                    {
+                        _dbContext.OrderDetails.Add(cate);
+                        _dbContext.SaveChanges();
+                        pro.Quantity = pro.Quantity - cate.Quantity;
+                        _dbContext.Products.Update(pro);
+                        _dbContext.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("Product quantity is not enough");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Product is null");
+                }
+
             }
             catch (Exception ex)
             {
