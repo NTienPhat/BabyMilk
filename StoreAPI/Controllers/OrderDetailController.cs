@@ -39,6 +39,23 @@ namespace StoreAPI.Controllers
             return Ok(_response);
         }
 
+        [HttpGet("GetByOrderId")]
+        public ActionResult<List<OrderDetail>> GetByOrderId(int orderId)
+        {
+            List<OrderDetail> b = _repo.GetByOrderId(orderId);
+            if (b == null)
+            {
+                _response.StatusCode = HttpStatusCode.NotFound;
+                _response.IsSuccess = false;
+                _response.ErrorMessages.Add("Can't found any order details!");
+                return NotFound(_response);
+            }
+            _response.Result = b;
+            _response.IsSuccess = true;
+            _response.StatusCode = HttpStatusCode.OK;
+            return Ok(_response);
+        }
+
         [HttpGet("{id:int}")]
         public ActionResult Get(int id)
         {

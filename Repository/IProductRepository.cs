@@ -9,9 +9,9 @@ namespace Repository
 {
     public interface IProductRepository
     {
-        List<Product> GetProduct();
+        Task<List<Product>> GetProduct();
         void DeleteProduct(Product cate);
-        Product GetProductById(int id);
+        Task<Product> GetProductById(int id);
         void UpdateProduct(Product cate);
         void CreateNewProduct(Product cate);
         List<Product> SearchByKeyword(string keyword);

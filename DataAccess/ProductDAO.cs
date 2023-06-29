@@ -31,16 +31,20 @@ namespace DataAccess
                 }
             }
         }
-        public List<Product> GetProduct()
+        public async Task<List<Product>> GetProduct()
         {
             try
             {
-                var candate = _dbContext.Products.ToList();
-                if (candate != null)
+                using (var _dbContext = new BabyMilkContext())
                 {
-                    return candate;
+                    var candate = await _dbContext.Products.ToListAsync();
+                    if (candate != null)
+                    {
+                        return candate;
+                    }
+                    return null;
                 }
-                return null;
+                
             }
             catch (Exception ex)
             {
@@ -61,16 +65,21 @@ namespace DataAccess
                 throw new Exception(ex.Message);
             }
         }
-        public Product GetProductById(int id)
+        public async Task<Product> GetProductById(int id)
         {
             try
             {
-                var ca = _dbContext.Products.FirstOrDefault(x => x.ProductId == id);
-                if (ca != null)
+                using (var _dbContext = new BabyMilkContext())
                 {
-                    return ca;
+                    Product ca = await _dbContext.Products.FirstOrDefaultAsync(x => x.ProductId == id);
+                    if (ca != null)
+                    {
+                        return ca;
+                    }
+                    return null;
                 }
-                return null;
+                
+                    
             }
             catch (Exception ex)
             {

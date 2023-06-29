@@ -35,7 +35,7 @@ namespace DataAccess
         {
             try
             {
-                var candate = _dbContext.Orders.ToList();
+                var candate = _dbContext.Orders.Include(x => x.OrderDetails).ToList();
                 if (candate != null)
                 {
                     return candate;
@@ -66,7 +66,7 @@ namespace DataAccess
         {
             try
             {
-                var ca = _dbContext.Orders.FirstOrDefault(x => x.OrderId == id);
+                var ca = _dbContext.Orders.Include(x => x.OrderDetails).FirstOrDefault(x => x.OrderId == id);
                 if (ca != null)
                 {
                     return ca;
@@ -84,7 +84,7 @@ namespace DataAccess
         {
             try
             {
-                var ca = _dbContext.Orders.Where(x => x.AccountId == id).ToList();
+                var ca = _dbContext.Orders.Where(x => x.AccountId == id).Include(x => x.OrderDetails).ToList();
                 if (ca != null)
                 {
                     return ca;

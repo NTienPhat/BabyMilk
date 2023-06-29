@@ -58,9 +58,9 @@ namespace StoreAPI.Controllers
         }
 
         [HttpGet("GetBabyOfMom")]
-        public ActionResult<Baby> GetBabyByMom(int momId)
+        public ActionResult<List<Baby>> GetBabyByMom(int momId)
         {
-            Baby b = _repo.GetBabyById(momId);
+            List<Baby> b = _repo.GetBabyByMom(momId);
             if (b == null)
             {
                 _response.StatusCode = HttpStatusCode.NotFound;

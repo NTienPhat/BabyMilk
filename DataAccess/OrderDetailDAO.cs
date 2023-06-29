@@ -49,6 +49,24 @@ namespace DataAccess
             }
         }
 
+        public List<OrderDetail> GetByOrderId(int id)
+        {
+            try
+            {
+                List<OrderDetail> candate = _dbContext.OrderDetails.Where(x => x.OrderId == id).ToList();
+                if (candate != null)
+                {
+                    return candate;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
 
         public void Delete(OrderDetail cate)
         {

@@ -28,9 +28,9 @@ namespace StoreAPI.Controllers
         }
         //[Authorize(Roles = "admin")]
         [HttpGet]
-        public ActionResult<List<Product>> Get()
+        public async Task<ActionResult<List<Product>>> Get()
         {
-            List<Product> products = _repo.GetProduct();
+            List<Product> products = await _repo.GetProduct();
             if (products == null || products.Count == 0)
             {
                 _response.StatusCode = HttpStatusCode.NotFound;
@@ -45,9 +45,9 @@ namespace StoreAPI.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public ActionResult<Product> Get(int id)
+        public async Task<ActionResult<Product>> Get(int id)
         {
-            Product pro = _repo.GetProductById(id);
+            Product pro = await _repo.GetProductById(id);
             if (pro == null)
             {
                 _response.StatusCode = HttpStatusCode.NotFound;
@@ -158,7 +158,7 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                var p = _repo.GetProductById(id);
+                Product p = await _repo.GetProductById(id);
                 if(p == null)
                 {
                     _response.StatusCode = HttpStatusCode.NotFound;
@@ -195,7 +195,7 @@ namespace StoreAPI.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var product = _repo.GetProductById(id);
+                    Product product = await _repo.GetProductById(id);
                     if(product == null)
                     {
                         _response.IsSuccess = false;

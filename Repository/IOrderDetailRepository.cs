@@ -10,6 +10,7 @@ namespace Repository
     public interface IOrderDetailRepository
     {
         List<OrderDetail> Get();
+        List<OrderDetail> GetByOrderId(int id);
         void Delete(OrderDetail cate);
         OrderDetail GetById(int id);
         void Update(OrderDetail cate);

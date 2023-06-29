@@ -14,9 +14,9 @@ namespace Repository
 
         public void DeleteProduct(Product cate) => ProductDAO.Instance.DeleteProduct(cate);
 
-        public Product GetProductById(int id) => ProductDAO.Instance.GetProductById(id);
+        public async Task<Product> GetProductById(int id) => await ProductDAO.Instance.GetProductById(id);
 
-        public List<Product> GetProduct() => ProductDAO.Instance.GetProduct();
+        public async Task<List<Product>> GetProduct() => await ProductDAO.Instance.GetProduct();
 
         public List<Product> SearchByKeyword(string keyword) => ProductDAO.Instance.SearchByKeyword(keyword);
 

@@ -144,7 +144,7 @@ namespace StoreAPI.Controllers
 
         [HttpPut("{id:int}")]
         //[Authorize(Roles = "admin")]
-        public IActionResult Put(int id, [FromBody] OrderCreateDTO p)
+        public IActionResult Put(int id, [FromBody] OrderUpdateDTO p)
         {
             if (ModelState.IsValid)
             {

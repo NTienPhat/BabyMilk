@@ -17,6 +17,7 @@ namespace Repository
         public OrderDetail GetById(int id) => OrderDetailDAO.Instance.GetById(id);
 
         public List<OrderDetail> Get() => OrderDetailDAO.Instance.Get();
+        public List<OrderDetail> GetByOrderId(int id) => OrderDetailDAO.Instance.GetByOrderId(id);
         public void Update(OrderDetail cate) => OrderDetailDAO.Instance.Update(cate);
     }
 }
