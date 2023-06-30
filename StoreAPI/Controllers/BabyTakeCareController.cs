@@ -39,6 +39,26 @@ namespace StoreAPI.Controllers
             return Ok(_response);
         }
 
+        [HttpGet("GetPostByMonth")]
+        public ActionResult GetPostByMonth(int month)
+        {
+            var b = _repo.Get();
+            var post = b.Where(x => x.Month == month)
+                .Select(btc => btc.Post)
+                .FirstOrDefault();
+            if (post == null)
+            {
+                _response.StatusCode = HttpStatusCode.NotFound;
+                _response.IsSuccess = false;
+                _response.ErrorMessages.Add("Can't found any post!");
+                return NotFound(_response);
+            }
+            _response.Result = post;
+            _response.IsSuccess = true;
+            _response.StatusCode = HttpStatusCode.OK;
+            return Ok(_response);
+        }
+
         [HttpGet("{id:int}")]
         public ActionResult Get(int id)
         {

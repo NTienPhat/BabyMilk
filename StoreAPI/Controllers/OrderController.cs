@@ -158,9 +158,11 @@ namespace StoreAPI.Controllers
                         _response.ErrorMessages.Add("Not Found!");
                         return NotFound(_response);
                     }
-                    var newPro = _mapper.Map<Order>(p);
-                    newPro.OrderId = id;
-                    _repo.UpdateOrder(newPro);
+                    //var newPro = _mapper.Map<Order>(p);
+                    //newPro.OrderId = id;
+                    pro.OrderStatus = p.OrderStatus;
+                    pro.ShippedDate = p.ShippedDate;
+                    _repo.UpdateOrder(pro);
                     _response.IsSuccess = true;
                     _response.StatusCode = HttpStatusCode.OK;
                     _response.Result = p;

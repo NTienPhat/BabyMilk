@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
 
 namespace BusinessObject.Models
 {
@@ -34,24 +33,13 @@ namespace BusinessObject.Models
         public virtual DbSet<UserVoucher> UserVouchers { get; set; } = null!;
         public virtual DbSet<Voucher> Vouchers { get; set; } = null!;
 
-        //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //        {
-        //            if (!optionsBuilder.IsConfigured)
-        //            {
-        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        //                optionsBuilder.UseSqlServer("Server=(local);Uid=ntp;Pwd=123456;Database=BabyMilk");
-        //            }
-        //        }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-            var d = Directory.GetCurrentDirectory();
-            IConfigurationRoot configuration = builder.Build();
-            string connectionString = configuration.GetConnectionString("DefaultConnection");
-            optionsBuilder.UseSqlServer(connectionString);
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=(local);Uid=ntp;Pwd=123456;Database=BabyMilk");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -159,9 +147,7 @@ namespace BusinessObject.Models
 
                 entity.Property(e => e.Month).HasColumnName("month");
 
-                entity.Property(e => e.Post)
-                    .HasColumnType("text")
-                    .HasColumnName("post");
+                entity.Property(e => e.Post).HasColumnName("post");
             });
 
             modelBuilder.Entity<Brand>(entity =>
