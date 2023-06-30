@@ -35,7 +35,7 @@ namespace DataAccess
         {
             try
             {
-                var candate = _dbContext.OrderDetails.ToList();
+                var candate = _dbContext.OrderDetails.Include(x => x.Product).ToList();
                 if (candate != null)
                 {
                     return candate;
@@ -53,7 +53,7 @@ namespace DataAccess
         {
             try
             {
-                List<OrderDetail> candate = _dbContext.OrderDetails.Where(x => x.OrderId == id).ToList();
+                List<OrderDetail> candate = _dbContext.OrderDetails.Where(x => x.OrderId == id).Include(x => x.Product).ToList();
                 if (candate != null)
                 {
                     return candate;
@@ -118,26 +118,32 @@ namespace DataAccess
         {
             try
             {
-                var pro = _dbContext.Products.FirstOrDefault(x => x.ProductId == cate.ProductId);
-                if (pro != null)
+                using (var _dbContext = new BabyMilkContext())
                 {
-                    if(pro.Quantity > cate.Quantity)
+                    var pro = _dbContext.Products.FirstOrDefault(x => x.ProductId == cate.ProductId);
+                    if (pro != null)
                     {
-                        _dbContext.OrderDetails.Add(cate);
-                        _dbContext.SaveChanges();
-                        pro.Quantity = pro.Quantity - cate.Quantity;
-                        _dbContext.Products.Update(pro);
-                        _dbContext.SaveChanges();
+                        if (pro.Quantity > cate.Quantity)
+                        {
+                            _dbContext.OrderDetails.Add(cate);
+                            _dbContext.SaveChanges();
+                            pro.Quantity = pro.Quantity - cate.Quantity;
+                            _dbContext.Products.Update(pro);
+                            _dbContext.SaveChanges();
+                        }
+                        else
+                        {
+                            throw new Exception("Product quantity is not enough");
+                        }
                     }
                     else
                     {
-                        throw new Exception("Product quantity is not enough");
+                        throw new Exception("Product is null");
                     }
+
                 }
-                else
-                {
-                    throw new Exception("Product is null");
-                }
+
+
 
             }
             catch (Exception ex)

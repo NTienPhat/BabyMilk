@@ -78,7 +78,6 @@ namespace StoreAPI.Controllers
         //[Authorize(Roles = "admin")]
         public async Task<ActionResult<ApiResponse>> Post([FromBody] OrderCreateDTO p)
         {
-
             try
             {
                 if (ModelState.IsValid)

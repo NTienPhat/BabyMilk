@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using BusinessObject.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 
 namespace StoreAPI.DTO
@@ -16,5 +17,7 @@ namespace StoreAPI.DTO
         public decimal Prices { get; set; }
         [Required]
         public int TotalQuantity { get; set; }
+        public int? ProductVoucherId { get; set; }
+        //public ICollection<OrderDetailsCreateDTO> OrderDetails { get; set; }
     }
 }
