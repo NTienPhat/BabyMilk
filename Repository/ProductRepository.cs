@@ -16,7 +16,7 @@ namespace Repository
 
         public async Task<Product> GetProductById(int id) => await ProductDAO.Instance.GetProductById(id);
 
-        public async Task<List<Product>> GetProduct() => await ProductDAO.Instance.GetProduct();
+        public async Task<List<Product>> GetProduct(int page, int pageSize) => await ProductDAO.Instance.GetProduct(page, pageSize);
 
         public List<Product> SearchByKeyword(string keyword) => ProductDAO.Instance.SearchByKeyword(keyword);
 

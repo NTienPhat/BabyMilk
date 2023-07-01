@@ -28,9 +28,9 @@ namespace StoreAPI.Controllers
         }
         //[Authorize(Roles = "admin")]
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> Get()
+        public async Task<ActionResult<List<Product>>> GetAll(int page = 1)
         {
-            List<Product> products = await _repo.GetProduct();
+            List<Product> products = await _repo.GetProduct(page,8);
             if (products == null || products.Count == 0)
             {
                 _response.StatusCode = HttpStatusCode.NotFound;

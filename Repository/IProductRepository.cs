@@ -9,7 +9,7 @@ namespace Repository
 {
     public interface IProductRepository
     {
-        Task<List<Product>> GetProduct();
+        Task<List<Product>> GetProduct(int page, int pageSize);
         void DeleteProduct(Product cate);
         Task<Product> GetProductById(int id);
         void UpdateProduct(Product cate);

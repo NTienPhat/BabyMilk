@@ -33,6 +33,8 @@ builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
 builder.Services.AddScoped<IVoucherRepository, VoucherRepository>();
 builder.Services.AddScoped<IUserVoucherRepository, UserVoucherRepository>();
 builder.Services.AddScoped<IOrderVoucherRepository, OrderVoucherRepository>();
+builder.Services.AddScoped<IRecomenderRepository, RecomenderRepository>();
+
 //Add NewtonsoftJson
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore

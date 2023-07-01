@@ -31,13 +31,18 @@ namespace DataAccess
                 }
             }
         }
-        public async Task<List<Product>> GetProduct()
+        public async Task<List<Product>> GetProduct(int page,int pageSize)
         {
             try
             {
                 using (var _dbContext = new BabyMilkContext())
                 {
-                    var candate = await _dbContext.Products.ToListAsync();
+                    if (page <= 1)
+                        page = 0;
+                    else
+                        page = page - 1;
+                    int totalNumber = page * pageSize;
+                    var candate = await _dbContext.Products.Skip(totalNumber).Take(pageSize).ToListAsync();
                     if (candate != null)
                     {
                         return candate;
