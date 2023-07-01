@@ -45,6 +45,7 @@ namespace StoreAPI.Controllers
                         new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                         new Claim("AccountId", cus.AccountId.ToString()),
                         new Claim("Name", cus.Name),
+                        new Claim("Role", cus.Role.ToString()),
                         new Claim("Email", cus.Email)
                     };
 
