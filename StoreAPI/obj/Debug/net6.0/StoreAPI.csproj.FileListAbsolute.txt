@@ -161,3 +161,4 @@ E:\FPT University\Semester 8\PRN231\GroupProject\BabyMilkStore\StoreAPI\obj\Debu
 E:\FPT University\Semester 8\PRN231\GroupProject\BabyMilkStore\StoreAPI\obj\Debug\net6.0\StoreAPI.genruntimeconfig.cache
 E:\FPT University\Semester 8\PRN231\GroupProject\BabyMilkStore\StoreAPI\obj\Debug\net6.0\ref\StoreAPI.dll
 E:\FPT University\Semester 8\PRN231\GroupProject\BabyMilkStore\StoreAPI\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
+E:\FPT University\Semester 8\PRN231\GroupProject\BabyMilkStore\StoreAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
