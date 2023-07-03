@@ -18,6 +18,7 @@ namespace StoreAPI.Controllers
         private readonly IMapper _mapper;
         private readonly IBlobService _blobService;
         private ApiResponse _response;
+        private PagingApiResponse _responsePaging;
 
         public ProductController(IProductRepository repo, IMapper mapper, IBlobService blobService)
         {
@@ -25,23 +26,39 @@ namespace StoreAPI.Controllers
             _mapper = mapper;
             _blobService = blobService;
             _response = new ApiResponse();
+            _responsePaging = new PagingApiResponse();
         }
         //[Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetAll(int page = 1)
         {
-            List<Product> products = await _repo.GetProduct(page,8);
+            var productInPage = 8;
+            List<Product> p = await _repo.GetAll();
+            var total = p.Count;
+            var rs = total % productInPage;
+            var pageNum = 0;
+            if(rs == 0)
+            {
+                pageNum = total / productInPage;
+            }
+            else
+            {
+                pageNum = total / productInPage +1;
+            }
+            List<Product> products = await _repo.GetProduct(page, productInPage);
             if (products == null || products.Count == 0)
             {
-                _response.StatusCode = HttpStatusCode.NotFound;
-                _response.IsSuccess = false;
-                _response.ErrorMessages.Add("Can't found any product!");
-                return NotFound(_response);
+                _responsePaging.StatusCode = HttpStatusCode.NotFound;
+                _responsePaging.IsSuccess = false;
+                _responsePaging.ErrorMessages.Add("Can't found any product!");
+                return NotFound(_responsePaging);
             }
-            _response.Result = products;
-            _response.IsSuccess = true;
-            _response.StatusCode = HttpStatusCode.OK;
-            return Ok(_response);
+            _responsePaging.Result = products;
+            _responsePaging.IsSuccess = true;
+            _responsePaging.StatusCode = HttpStatusCode.OK;
+            _responsePaging.total = total;
+            _responsePaging.pageNum = pageNum;
+            return Ok(_responsePaging);
         }
 
         [HttpGet("{id:int}")]

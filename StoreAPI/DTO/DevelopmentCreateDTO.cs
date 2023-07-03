@@ -7,10 +7,10 @@ namespace StoreAPI.DTO
         [Required]
         public string Name { get; set; } = null!;
         [Required]
-        [Range(6, int.MaxValue)]
+        [Range(0, 200)]
         public int MinMonth { get; set; }
         [Required]
-        [Range(6, int.MaxValue)]
+        [Range(0, 200)]
         public int MaxMonth { get; set; }
         [Required]
         public string Descript { get; set; } = null!;

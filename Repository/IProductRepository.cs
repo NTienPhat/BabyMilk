@@ -10,6 +10,7 @@ namespace Repository
     public interface IProductRepository
     {
         Task<List<Product>> GetProduct(int page, int pageSize);
+        Task<List<Product>> GetAll();
         void DeleteProduct(Product cate);
         Task<Product> GetProductById(int id);
         void UpdateProduct(Product cate);

@@ -57,6 +57,29 @@ namespace DataAccess
                 throw new Exception(ex.Message);
             }
         }
+
+        public async Task<List<Product>> GetAll()
+        {
+            try
+            {
+                using (var _dbContext = new BabyMilkContext())
+                {
+                    var candate = await _dbContext.Products.ToListAsync();
+                    if (candate != null)
+                    {
+                        return candate;
+                    }
+                    return null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void DeleteProduct(Product cate)
         {
             try
