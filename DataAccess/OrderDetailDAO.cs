@@ -12,7 +12,7 @@ namespace DataAccess
     {
         private static OrderDetailDAO instance = null;
         private static readonly object instanceLock = new object();
-        BabyMilkContext _dbContext = new BabyMilkContext();
+        BabyMilkV2Context _dbContext = new BabyMilkV2Context();
         public OrderDetailDAO()
         {
 
@@ -118,7 +118,7 @@ namespace DataAccess
         {
             try
             {
-                using (var _dbContext = new BabyMilkContext())
+                using (var _dbContext = new BabyMilkV2Context())
                 {
                     var pro = _dbContext.Products.FirstOrDefault(x => x.ProductId == cate.ProductId);
                     if (pro != null)

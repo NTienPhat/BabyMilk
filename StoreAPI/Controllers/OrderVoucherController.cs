@@ -141,7 +141,7 @@ namespace StoreAPI.Controllers
                         return NotFound(_response);
                     }
                     var newPro = _mapper.Map<OrderVoucher>(p);
-                    newPro.ProductVoucherId = id;
+                    newPro.OrderVoucherId = id;
                     _repo.Update(newPro);
                     _response.IsSuccess = true;
                     _response.StatusCode = HttpStatusCode.OK;

@@ -22,7 +22,6 @@ namespace BusinessObject.Models
         public int Quantity { get; set; }
 
         public virtual Brand Brand { get; set; } = null!;
-        public virtual ProductBabyDevelopment? ProductBabyDevelopment { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ICollection<ProductBabyDevelopment> ProductBabyDevelopments { get; set; }
     }

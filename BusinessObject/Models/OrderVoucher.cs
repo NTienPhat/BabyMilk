@@ -10,10 +10,10 @@ namespace BusinessObject.Models
             Orders = new HashSet<Order>();
         }
 
-        public int ProductVoucherId { get; set; }
+        public int OrderVoucherId { get; set; }
         public int VoucherId { get; set; }
-        public int ProductId { get; set; }
 
+        public virtual Voucher Voucher { get; set; } = null!;
         public virtual ICollection<Order> Orders { get; set; }
     }
 }

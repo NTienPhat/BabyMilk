@@ -13,8 +13,5 @@ namespace StoreAPI.DTO
         [Required]
         [Range(6, int.MaxValue)]
         public int MaxMonth { get; set; }
-        [Required]
-        [ValidateNever]
-        public int ProductBabyDevelopmentId { get; set; }
     }
 }

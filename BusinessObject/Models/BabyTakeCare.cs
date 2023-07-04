@@ -12,7 +12,7 @@ namespace BusinessObject.Models
 
         public int BabyTakeCareId { get; set; }
         public int Month { get; set; }
-        public string Post { get; set; } = null!;
+        public string? Post { get; set; }
 
         public virtual ICollection<TakeCareDevelopment> TakeCareDevelopments { get; set; }
     }

@@ -19,8 +19,6 @@ namespace StoreAPI.DTO
         [Required]
         [Range(0, 2000000)]
         public decimal Price { get; set; }
-        [ValidateNever]
-        public int? ProductVoucherId { get; set; }
         [Required]
         public int BrandId { get; set; }
         [ValidateNever]

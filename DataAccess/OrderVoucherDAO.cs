@@ -12,7 +12,7 @@ namespace DataAccess
     {
         private static OrderVoucherDAO instance = null;
         private static readonly object instanceLock = new object();
-        BabyMilkContext _dbContext = new BabyMilkContext();
+        BabyMilkV2Context _dbContext = new BabyMilkV2Context();
         public OrderVoucherDAO()
         {
 
@@ -67,7 +67,7 @@ namespace DataAccess
         {
             try
             {
-                var ca = _dbContext.OrderVouchers.FirstOrDefault(x => x.ProductVoucherId == id);
+                var ca = _dbContext.OrderVouchers.FirstOrDefault(x => x.OrderVoucherId == id);
                 if (ca != null)
                 {
                     return ca;

@@ -13,9 +13,7 @@ namespace BusinessObject.Models
         public int MilestonesByMonthId { get; set; }
         public int MinMonth { get; set; }
         public int MaxMonth { get; set; }
-        public int ProductBabyDevelopmentId { get; set; }
 
-        public virtual ProductBabyDevelopment ProductBabyDevelopment { get; set; } = null!;
         public virtual ICollection<ProductBabyDevelopment> ProductBabyDevelopments { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace DataAccess
     {
         private static ProductDAO instance = null;
         private static readonly object instanceLock = new object();
-        BabyMilkContext _dbContext = new BabyMilkContext();
+        BabyMilkV2Context _dbContext = new BabyMilkV2Context();
         public ProductDAO()
         {
 
@@ -35,7 +35,7 @@ namespace DataAccess
         {
             try
             {
-                using (var _dbContext = new BabyMilkContext())
+                using (var _dbContext = new BabyMilkV2Context())
                 {
                     if (page <= 1)
                         page = 0;
@@ -62,7 +62,7 @@ namespace DataAccess
         {
             try
             {
-                using (var _dbContext = new BabyMilkContext())
+                using (var _dbContext = new BabyMilkV2Context())
                 {
                     var candate = await _dbContext.Products.ToListAsync();
                     if (candate != null)
@@ -97,7 +97,7 @@ namespace DataAccess
         {
             try
             {
-                using (var _dbContext = new BabyMilkContext())
+                using (var _dbContext = new BabyMilkV2Context())
                 {
                     Product ca = await _dbContext.Products.FirstOrDefaultAsync(x => x.ProductId == id);
                     if (ca != null)

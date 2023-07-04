@@ -6,7 +6,5 @@ namespace StoreAPI.DTO
     {
         [Required]
         public int VoucherId { get; set; }
-        [Required]
-        public int ProductId { get; set; }
     }
 }

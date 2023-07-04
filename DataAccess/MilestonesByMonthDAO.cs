@@ -12,7 +12,7 @@ namespace DataAccess
     {
         private static MilestonesByMonthDAO instance = null;
         private static readonly object instanceLock = new object();
-        BabyMilkContext _dbContext = new BabyMilkContext();
+        BabyMilkV2Context _dbContext = new BabyMilkV2Context();
         public MilestonesByMonthDAO()
         {
 

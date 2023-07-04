@@ -7,6 +7,7 @@ namespace BusinessObject.Models
     {
         public Voucher()
         {
+            OrderVouchers = new HashSet<OrderVoucher>();
             UserVouchers = new HashSet<UserVoucher>();
         }
 
@@ -15,6 +16,7 @@ namespace BusinessObject.Models
         public decimal Discount { get; set; }
         public string Type { get; set; } = null!;
 
+        public virtual ICollection<OrderVoucher> OrderVouchers { get; set; }
         public virtual ICollection<UserVoucher> UserVouchers { get; set; }
     }
 }
