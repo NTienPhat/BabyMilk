@@ -37,6 +37,8 @@ builder.Services.AddScoped<IVoucherRepository, VoucherRepository>();
 builder.Services.AddScoped<IUserVoucherRepository, UserVoucherRepository>();
 builder.Services.AddScoped<IOrderVoucherRepository, OrderVoucherRepository>();
 builder.Services.AddScoped<IRecomenderRepository, RecomenderRepository>();
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+
 
 //Add NewtonsoftJson
 builder.Services.AddControllers().AddNewtonsoftJson(options =>

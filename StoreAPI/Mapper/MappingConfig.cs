@@ -28,6 +28,7 @@ namespace StoreAPI.Mapper
                 config.CreateMap<UserVoucher, UserVoucherCreateDTO>().ReverseMap();
                 config.CreateMap<OrderVoucher, OrderVoucherCreateDTO>().ReverseMap();
                 config.CreateMap<Order, OrderUpdateDTO>().ReverseMap();
+                config.CreateMap<Payment, PaymentCreateDTO>().ReverseMap();
 
             });
             return mappingConfig;
