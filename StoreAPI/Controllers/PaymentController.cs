@@ -57,7 +57,7 @@ namespace StoreAPI.Controllers
             return Ok(_response);
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet]
         [Route("GetByUser")]
         public ActionResult GetByUser(int id)
         {
