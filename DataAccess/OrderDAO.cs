@@ -35,7 +35,7 @@ namespace DataAccess
         {
             try
             {
-                var candate = _dbContext.Orders.Include(x => x.Payments).Include(y => y.OrderDetails).ToList();
+                var candate = _dbContext.Orders.Include(y => y.OrderDetails).ToList();
                 if (candate != null)
                 {
                     return candate;
@@ -52,6 +52,16 @@ namespace DataAccess
         {
             try
             {
+                
+                List<OrderDetail> orderDetails = _dbContext.OrderDetails.Where(x => x.OrderId == cate.OrderId).ToList();
+                if(orderDetails.Count > 0)
+                {
+                    foreach(var item in orderDetails)
+                    {
+                        _dbContext.OrderDetails.Remove(item);
+                    }
+                    _dbContext.SaveChanges();
+                }
                 _dbContext.ChangeTracker.Clear();
                 _dbContext.Orders.Remove(cate);
                 _dbContext.SaveChanges();
