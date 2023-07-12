@@ -35,7 +35,7 @@ namespace DataAccess
         {
             try
             {
-                var candate = _dbContext.Orders.Include(x => x.OrderDetails).ToList();
+                var candate = _dbContext.Orders.Include(x => x.Payments).Include(y => y.OrderDetails).ToList();
                 if (candate != null)
                 {
                     return candate;
@@ -84,12 +84,15 @@ namespace DataAccess
         {
             try
             {
-                var ca = _dbContext.Orders.Where(x => x.AccountId == id).Include(x => x.OrderDetails).ToList();
-                if (ca != null)
+                using (var _dbContext = new BabyMilkV2Context())
                 {
-                    return ca;
+                    var ca = _dbContext.Orders.Where(x => x.AccountId == id).Include(x => x.OrderDetails).ToList();
+                    if (ca != null)
+                    {
+                        return ca;
+                    }
+                    return null;
                 }
-                return null;
             }
             catch (Exception ex)
             {

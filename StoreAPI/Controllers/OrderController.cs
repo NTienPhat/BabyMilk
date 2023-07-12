@@ -13,11 +13,13 @@ namespace StoreAPI.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderRepository _repo;
+        private readonly IPaymentRepository _repoPayment;
         private readonly IMapper _mapper;
         private ApiResponse _response;
 
-        public OrderController(IOrderRepository repo, IMapper mapper)
+        public OrderController(IOrderRepository repo, IPaymentRepository repoPayment, IMapper mapper)
         {
+            _repoPayment = repoPayment;
             _repo = repo;
             _mapper = mapper;
             _response = new ApiResponse();
@@ -84,7 +86,18 @@ namespace StoreAPI.Controllers
                 {
                     var newPro = _mapper.Map<Order>(p);
                     _repo.CreateNewOrder(newPro);
-                    _response.Result = newPro;
+                    var payment = new PaymentCreateDTO()
+                    {
+                        AccountId = newPro.AccountId,
+                        OrderId = newPro.OrderId,
+                        Type = "cash",
+                        TokenPayment = $"EzMom-{newPro.OrderId}-{newPro.OrderDate.ToString("MM-dd-yyy")}"
+                    };
+                    var newPayment = _mapper.Map<Payment>(payment);
+                    _repoPayment.Create(newPayment);
+                    var orderResponse = _mapper.Map<OrderCreateResponseDTO>(newPro);
+                    orderResponse.Token = payment.TokenPayment;
+                    _response.Result = orderResponse;
                     _response.IsSuccess = true;
                     _response.StatusCode = HttpStatusCode.OK;
                     return Ok(_response);

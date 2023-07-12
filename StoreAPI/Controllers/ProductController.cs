@@ -32,7 +32,7 @@ namespace StoreAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetAll(int page = 1)
         {
-            var productInPage = 8;
+            var productInPage = 9;
             List<Product> p = await _repo.GetAll();
             var total = p.Count;
             var rs = total % productInPage;

@@ -8,10 +8,10 @@ namespace StoreAPI.DTO
         //[Key]
         //public int MilestonesByMonthId { get; set; }
         [Required]
-        [Range(6,int.MaxValue)]
+        [Range(0,36)]
         public int MinMonth { get; set; }
         [Required]
-        [Range(6, int.MaxValue)]
+        [Range(0, 36)]
         public int MaxMonth { get; set; }
     }
 }
