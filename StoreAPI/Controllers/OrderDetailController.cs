@@ -75,16 +75,20 @@ namespace StoreAPI.Controllers
 
         [HttpPost]
         //[Authorize(Roles = "admin")]
-        public async Task<ActionResult<ApiResponse>> Post([FromBody] OrderDetailsCreateDTO p)
+        public async Task<ActionResult<ApiResponse>> Post([FromBody] ListOrderDetailsCreateDTO list)
         {
 
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var newPro = _mapper.Map<OrderDetail>(p);
-                    _repo.Create(newPro);
-                    _response.Result = newPro;
+                    foreach (var item in list.OrderDetailsCreates)
+                    {
+                        var newPro = _mapper.Map<OrderDetail>(item);
+                        _repo.Create(newPro);
+                        
+                    }
+                    //_response.Result = newPro;
                     _response.IsSuccess = true;
                     _response.StatusCode = HttpStatusCode.OK;
                     return Ok(_response);

@@ -97,6 +97,7 @@ namespace StoreAPI.Controllers
                     _repoPayment.Create(newPayment);
                     var orderResponse = _mapper.Map<OrderCreateResponseDTO>(newPro);
                     orderResponse.Token = payment.TokenPayment;
+                    orderResponse.OderId = newPro.OrderId;
                     _response.Result = orderResponse;
                     _response.IsSuccess = true;
                     _response.StatusCode = HttpStatusCode.OK;

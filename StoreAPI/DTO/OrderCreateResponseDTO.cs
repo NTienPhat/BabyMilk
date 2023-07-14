@@ -5,6 +5,7 @@ namespace StoreAPI.DTO
 {
     public class OrderCreateResponseDTO
     {
+        public int OderId { get; set; }
         public int AccountId { get; set; }
         public string ShippingAddress { get; set; } = null!;
         public decimal Prices { get; set; }
