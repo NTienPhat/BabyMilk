@@ -75,20 +75,55 @@ namespace StoreAPI.Controllers
 
         [HttpPost]
         //[Authorize(Roles = "admin")]
-        public async Task<ActionResult<ApiResponse>> Post([FromBody] ListOrderDetailsCreateDTO list)
+        //Post List OrderDetails
+        //public async Task<ActionResult<ApiResponse>> Post([FromBody] ListOrderDetailsCreateDTO list)
+        //{
+
+        //    try
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            foreach (var item in list.OrderDetailsCreates)
+        //            {
+        //                var newPro = _mapper.Map<OrderDetail>(item);
+        //                _repo.Create(newPro);
+
+        //            }
+        //            //_response.Result = newPro;
+        //            _response.IsSuccess = true;
+        //            _response.StatusCode = HttpStatusCode.OK;
+        //            return Ok(_response);
+        //        }
+        //        else
+        //        {
+        //            _response.StatusCode = HttpStatusCode.BadRequest;
+        //            _response.IsSuccess = false;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _response.IsSuccess = false;
+        //        _response.StatusCode = HttpStatusCode.BadRequest;
+        //        _response.ErrorMessages = new List<string>()
+        //        {
+        //            ex.ToString()
+        //        };
+        //    }
+        //    return _response;
+
+        //}
+
+        [HttpPost]
+        public async Task<ActionResult<ApiResponse>> Post([FromBody] OrderDetailsCreateDTO p)
         {
 
             try
             {
                 if (ModelState.IsValid)
                 {
-                    foreach (var item in list.OrderDetailsCreates)
-                    {
-                        var newPro = _mapper.Map<OrderDetail>(item);
-                        _repo.Create(newPro);
-                        
-                    }
-                    //_response.Result = newPro;
+                    var newPro = _mapper.Map<OrderDetail>(p);
+                    _repo.Create(newPro);
+                    _response.Result = newPro;
                     _response.IsSuccess = true;
                     _response.StatusCode = HttpStatusCode.OK;
                     return Ok(_response);

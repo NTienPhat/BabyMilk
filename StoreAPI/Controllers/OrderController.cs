@@ -76,8 +76,8 @@ namespace StoreAPI.Controllers
             return Ok(_response);
         }
 
+
         [HttpPost]
-        //[Authorize(Roles = "admin")]
         public async Task<ActionResult<ApiResponse>> Post([FromBody] OrderCreateDTO p)
         {
             try
