@@ -35,7 +35,10 @@ namespace DataAccess
         {
             try
             {
-                var candate = _dbContext.Orders.Include(y => y.OrderDetails).ToList();
+                var candate = _dbContext.Orders
+                    .Include(y => y.OrderDetails)
+                    .Include(y => y.Payments)
+                    .ToList();
                 if (candate != null)
                 {
                     return candate;
@@ -62,7 +65,16 @@ namespace DataAccess
                     }
                     _dbContext.SaveChanges();
                 }
+                //Payment pay = _dbContext.Payments.FirstOrDefault(x => x.OrderId == cate.OrderId);
+                //if (pay != null)
+                //{
+                //    _dbContext.ChangeTracker.Clear();
+                //    _dbContext.Payments.Remove(pay);
+                //    _dbContext.ChangeTracker.Clear();
+                //}
                 _dbContext.ChangeTracker.Clear();
+                _dbContext.Payments.RemoveRange(cate.Payments);
+                _dbContext.SaveChanges();
                 _dbContext.Orders.Remove(cate);
                 _dbContext.SaveChanges();
             }
@@ -76,7 +88,8 @@ namespace DataAccess
         {
             try
             {
-                var ca = _dbContext.Orders.Include(x => x.OrderDetails).FirstOrDefault(x => x.OrderId == id);
+                var ca = _dbContext.Orders.Include(x => x.OrderDetails)
+                    .Include(x => x.Payments).FirstOrDefault(x => x.OrderId == id);
                 if (ca != null)
                 {
                     return ca;
