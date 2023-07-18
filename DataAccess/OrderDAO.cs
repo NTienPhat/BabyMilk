@@ -109,7 +109,8 @@ namespace DataAccess
             {
                 using (var _dbContext = new BabyMilkV2Context())
                 {
-                    var ca = _dbContext.Orders.Where(x => x.AccountId == id).Include(x => x.OrderDetails).ToList();
+                    var ca = _dbContext.Orders.Where(x => x.AccountId == id)
+                        .Include(y => y.OrderDetails).Include(y => y.Payments).ToList();
                     if (ca != null)
                     {
                         return ca;
