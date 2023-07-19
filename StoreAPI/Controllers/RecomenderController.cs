@@ -10,7 +10,6 @@ using System.Net;
 
 namespace StoreAPI.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class RecomenderController : ControllerBase
