@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessObject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
@@ -22,8 +23,8 @@ namespace StoreAPI.Controllers
             _mapper = mapper;
             _response = new ApiResponse();
         }
-        //[Authorize(Roles = "admin")]
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public ActionResult<List<Baby>> Get()
         {
             List<Baby> products = _repo.GetBaby();
@@ -41,6 +42,7 @@ namespace StoreAPI.Controllers
         }
 
         [HttpGet("{id:int}")]
+        [Authorize]
         public ActionResult<Baby> Get(int id)
         {
             Baby b = _repo.GetBabyById(id);
@@ -56,7 +58,7 @@ namespace StoreAPI.Controllers
             _response.StatusCode = HttpStatusCode.OK;
             return Ok(_response);
         }
-
+        [Authorize(Roles = "customer")]
         [HttpGet("GetBabyOfMom")]
         public ActionResult<List<Baby>> GetBabyByMom(int momId)
         {
@@ -75,7 +77,7 @@ namespace StoreAPI.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "customer")]
         public IActionResult Post([FromBody] BabyCreateDTO p)
         {
             if (ModelState.IsValid)
@@ -107,9 +109,8 @@ namespace StoreAPI.Controllers
 
         }
 
-
+        [Authorize]
         [HttpDelete("{id}")]
-        //[Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -134,6 +135,7 @@ namespace StoreAPI.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Authorize]
         //[Authorize(Roles = "admin")]
         public IActionResult Put(int id,[FromBody] BabyCreateDTO p)
         {

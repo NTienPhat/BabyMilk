@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessObject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
 using StoreAPI.DTO;
@@ -21,7 +22,7 @@ namespace StoreAPI.Controllers
             _mapper = mapper;
             _response = new ApiResponse();
         }
-
+        [Authorize]
         [HttpGet]
         public ActionResult Get()
         {
@@ -38,7 +39,7 @@ namespace StoreAPI.Controllers
             _response.StatusCode = HttpStatusCode.OK;
             return Ok(_response);
         }
-
+        [Authorize]
         [HttpGet("GetByOrderId")]
         public ActionResult<List<OrderDetail>> GetByOrderId(int orderId)
         {
@@ -55,7 +56,7 @@ namespace StoreAPI.Controllers
             _response.StatusCode = HttpStatusCode.OK;
             return Ok(_response);
         }
-
+        [Authorize]
         [HttpGet("{id:int}")]
         public ActionResult Get(int id)
         {
@@ -112,7 +113,7 @@ namespace StoreAPI.Controllers
         //    return _response;
 
         //}
-
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<ApiResponse>> Post([FromBody] OrderDetailsCreateDTO p)
         {
@@ -147,7 +148,7 @@ namespace StoreAPI.Controllers
 
         }
 
-
+        [Authorize]
         [HttpDelete("{id}")]
         //[Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int id)
@@ -179,7 +180,7 @@ namespace StoreAPI.Controllers
                 return NotFound(_response);
             }
         }
-
+        [Authorize]
         [HttpPut("{id:int}")]
         //[Authorize(Roles = "admin")]
         public IActionResult Put(int id, [FromBody] OrderDetailsCreateDTO p)

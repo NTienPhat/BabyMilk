@@ -29,6 +29,7 @@ namespace StoreAPI.Controllers
             _responsePaging = new PagingApiResponse();
         }
         //[Authorize(Roles = "admin")]
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetAll(int page = 1)
         {
@@ -61,6 +62,7 @@ namespace StoreAPI.Controllers
             return Ok(_responsePaging);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Product>> Get(int id)
         {
@@ -121,7 +123,7 @@ namespace StoreAPI.Controllers
         //    return BadRequest(_response);
 
         //}
-
+        [Authorize(Roles = "admin")]
         [HttpPost]
         //[Authorize(Roles = "admin")]
         public async Task<IActionResult> Post([FromForm] ProductCreateDTO p)
@@ -168,7 +170,7 @@ namespace StoreAPI.Controllers
             return BadRequest(_response);
 
         }
-
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id:int}")]
         //[Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int id)
@@ -202,7 +204,7 @@ namespace StoreAPI.Controllers
                 return BadRequest(_response);
             }
         }
-
+        [Authorize(Roles = "admin")]
         [HttpPut("{id:int}")]
         //[Authorize(Roles = "admin")]
         public async Task<IActionResult> Put(int id,[FromForm] ProductUpdateDTO p)
