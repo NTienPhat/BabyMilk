@@ -42,7 +42,7 @@ namespace DataAccess
                     else
                         page = page - 1;
                     int totalNumber = page * pageSize;
-                    var candate = await _dbContext.Products.Skip(totalNumber).Take(pageSize).ToListAsync();
+                    var candate = await _dbContext.Products.Include(x => x.Brand).Skip(totalNumber).Take(pageSize).ToListAsync();
                     if (candate != null)
                     {
                         return candate;
@@ -64,7 +64,7 @@ namespace DataAccess
             {
                 using (var _dbContext = new BabyMilkV2Context())
                 {
-                    var candate = await _dbContext.Products.ToListAsync();
+                    var candate = await _dbContext.Products.Include(x => x.Brand).ToListAsync();
                     if (candate != null)
                     {
                         return candate;

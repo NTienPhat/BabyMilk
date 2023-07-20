@@ -61,6 +61,23 @@ namespace StoreAPI.Controllers
             _responsePaging.pageNum = pageNum;
             return Ok(_responsePaging);
         }
+        [Authorize(Roles = "admin")]
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<List<Product>>> GetAll()
+        {
+            List<Product> products = await _repo.GetAll();
+            if (products == null || products.Count == 0)
+            {
+                _response.StatusCode = HttpStatusCode.NotFound;
+                _response.IsSuccess = false;
+                _response.ErrorMessages.Add("Can't found any product!");
+                return NotFound(_response);
+            }
+            _response.Result = products;
+            _response.IsSuccess = true;
+            _response.StatusCode = HttpStatusCode.OK;
+            return Ok(_response);
+        }
 
         [AllowAnonymous]
         [HttpGet("{id:int}")]
