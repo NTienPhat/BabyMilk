@@ -58,7 +58,7 @@ namespace StoreAPI.Controllers
                     _configuration["Jwt:Issuer"],
                     _configuration["Jwt:Audience"],
                     claims,
-                    expires: DateTime.UtcNow.AddMinutes(10),
+                    expires: DateTime.UtcNow.AddDays(5),
                     signingCredentials: signIn);
 
                 var tokenObject = new { Token = new JwtSecurityTokenHandler().WriteToken(token) };
