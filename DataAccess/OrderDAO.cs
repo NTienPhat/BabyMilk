@@ -38,6 +38,7 @@ namespace DataAccess
                 var candate = _dbContext.Orders
                     .Include(y => y.OrderDetails)
                     .Include(y => y.Payments)
+                    .Include(y => y.Account)
                     .ToList();
                 if (candate != null)
                 {
@@ -89,7 +90,8 @@ namespace DataAccess
             try
             {
                 var ca = _dbContext.Orders.Include(x => x.OrderDetails)
-                    .Include(x => x.Payments).FirstOrDefault(x => x.OrderId == id);
+                    .Include(x => x.Payments).Include(y => y.Account)
+                    .FirstOrDefault(x => x.OrderId == id);
                 if (ca != null)
                 {
                     return ca;
