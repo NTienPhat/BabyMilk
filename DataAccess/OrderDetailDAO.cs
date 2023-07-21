@@ -35,12 +35,15 @@ namespace DataAccess
         {
             try
             {
-                var candate = _dbContext.OrderDetails.Include(x => x.Product).ToList();
-                if (candate != null)
+                using (var _dbContext = new BabyMilkV2Context())
                 {
-                    return candate;
+                    var candate = _dbContext.OrderDetails.Include(x => x.Product).ToList();
+                    if (candate != null)
+                    {
+                        return candate;
+                    }
+                    return null;
                 }
-                return null;
             }
             catch (Exception ex)
             {
@@ -53,12 +56,15 @@ namespace DataAccess
         {
             try
             {
-                List<OrderDetail> candate = _dbContext.OrderDetails.Where(x => x.OrderId == id).Include(x => x.Product).ToList();
-                if (candate != null)
+                using (var _dbContext = new BabyMilkV2Context())
                 {
-                    return candate;
+                    List<OrderDetail> candate = _dbContext.OrderDetails.Where(x => x.OrderId == id).Include(x => x.Product).ToList();
+                    if (candate != null)
+                    {
+                        return candate;
+                    }
+                    return null;
                 }
-                return null;
             }
             catch (Exception ex)
             {
@@ -85,12 +91,15 @@ namespace DataAccess
         {
             try
             {
-                var ca = _dbContext.OrderDetails.FirstOrDefault(x => x.OrderDetailsId == id);
-                if (ca != null)
+                using (var _dbContext = new BabyMilkV2Context())
                 {
-                    return ca;
+                    var ca = _dbContext.OrderDetails.FirstOrDefault(x => x.OrderDetailsId == id);
+                    if (ca != null)
+                    {
+                        return ca;
+                    }
+                    return null;
                 }
-                return null;
             }
             catch (Exception ex)
             {
